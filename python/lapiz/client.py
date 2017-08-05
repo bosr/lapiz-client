@@ -20,7 +20,7 @@ class Client(object):
             raise ValueError('Hostname should be formatted as an ip: x.x.x.x')
         self.url = "http://{}:{}".format(self.hostname, self.port)
 
-        check_health(self.url)  # will throw if server is not connected
+        check_status(self.url)  # will throw if server is not connected
 
 
     def close(self):
@@ -40,8 +40,8 @@ class Client(object):
         requests.post(url, json=payload)
 
 
-def check_health(url):
-    url += '/health'
+def check_status(url):
+    url += '/status'
 
     # check server is working (not only up).
     try:
